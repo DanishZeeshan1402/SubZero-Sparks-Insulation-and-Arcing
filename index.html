@@ -1,0 +1,1604 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ladakh Engineering Innovations | Sustainable Materials & DASH-IB</title>
+  <meta name="description" content="Portfolio showcasing Upcycled Waste Insulation for Cold Climates and DASH-IB Dynamic Self-Healing Conductor Technology for Low-Pressure Environments.">
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            mountain: '#1e293b',
+            ice: '#f8fafc',
+            sky: '#38bdf8',
+            valley: '#10b981',
+            sungold: '#f59e0b',
+            cyanaccent: '#06b6d4',
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- KaTeX for High-Fidelity Mathematical Typesetting -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" onload="if(window.renderMathInElement){renderMathInElement(document.body);}"></script>
+
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="asset/styles.css">
+</head>
+
+<body class="mode-katex-view bg-[#0b0f19] text-slate-100 antialiased selection:bg-cyan-500 selection:text-slate-900">
+
+  <!-- ==========================================
+       SCROLL-DRIVEN BACKGROUND CANVAS
+       ========================================== -->
+  <canvas id="ladakh-canvas" class="fixed inset-0 w-full h-full pointer-events-none z-0"></canvas>
+
+  <!-- ==========================================
+       TOP NAVIGATION BAR
+       ========================================== -->
+  <header class="fixed top-0 left-0 right-0 z-50 glass-nav transition-all">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-18 py-3 flex items-center justify-between">
+      <!-- Logo & Title -->
+      <a href="#hero" class="flex items-center gap-3 group">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-cyan-500 via-blue-600 to-amber-400 flex items-center justify-center shadow-lg shadow-cyan-500/20 group-hover:scale-105 transition-transform">
+          <span class="text-xl">🏔️</span>
+        </div>
+        <div>
+          <div class="font-black text-sm tracking-wider uppercase text-white group-hover:text-cyan-400 transition-colors">
+            LADAKH INNOVATIONS
+          </div>
+          <div class="text-[11px] text-slate-400 font-mono tracking-tight">Smart Materials & Aerospace Conductors</div>
+        </div>
+      </a>
+
+      <!-- Desktop Nav Links -->
+      <nav class="hidden lg:flex items-center gap-5 text-xs font-semibold tracking-wide">
+        <a href="#hero" class="nav-anchor text-slate-300 hover:text-cyan-400 transition-colors py-1">Home</a>
+        <a href="#thermal-insulation" class="nav-anchor text-slate-300 hover:text-cyan-400 transition-colors py-1">Thermal Insulation (Ladakh Waste)</a>
+        <a href="#dash-ib" class="nav-anchor text-slate-300 hover:text-cyan-400 transition-colors py-1">DASH-IB (Arcing Prevention)</a>
+        <a href="#radiation-shielding" class="nav-anchor text-slate-300 hover:text-cyan-400 transition-colors py-1">Radiation Shielding (HAA/SHAA)</a>
+        <a href="#comparison" class="nav-anchor text-slate-300 hover:text-cyan-400 transition-colors py-1">Comparison Matrix</a>
+        <a href="#roadmap" class="nav-anchor text-slate-300 hover:text-cyan-400 transition-colors py-1">Roadmap</a>
+      </nav>
+
+      <!-- Global Controls: LaTeX Toggle & Animation Play/Pause -->
+      <div class="flex items-center gap-2 sm:gap-3">
+        <!-- LaTeX / Raw Toggle -->
+        <button id="btn-math-toggle" title="Toggle LaTeX formula rendering or Raw Code markup" 
+          class="flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold rounded-lg border border-cyan-400/40 bg-slate-900/80 hover:bg-slate-800 transition-all text-cyan-300 shadow-sm">
+          <span class="text-sm">∑</span>
+          <span id="math-toggle-status" class="hidden sm:inline">KaTeX Render</span>
+        </button>
+
+        <!-- Scenic Landscape View Mode Toggle -->
+        <button id="btn-scenic-toggle" title="Toggle Scenic View to admire the snow peaks, stream, farmhouse, and sheep flock"
+          class="flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold rounded-lg border border-emerald-500/40 bg-slate-900/80 hover:bg-slate-800 transition-all text-emerald-300 shadow-sm">
+          <span>🌄</span>
+          <span id="scenic-text" class="hidden sm:inline">Scenic View</span>
+        </button>
+
+        <!-- Animation Play/Pause -->
+        <button id="btn-anim-toggle" title="Play or pause background landscape animation"
+          class="flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold rounded-lg border border-slate-700 bg-slate-900/80 hover:bg-slate-800 transition-all text-slate-200">
+          <span id="anim-icon">⏸️</span>
+          <span id="anim-text" class="hidden md:inline">Pause Canvas</span>
+        </button>
+
+        <!-- Mobile Menu Toggle Button -->
+        <button id="mobile-menu-btn" class="lg:hidden p-2 rounded-lg bg-slate-800/80 border border-slate-700 text-slate-300 hover:text-white">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Nav Menu Dropdown -->
+    <div id="mobile-nav-menu" class="hidden lg:hidden bg-slate-900/95 border-b border-slate-800 px-4 py-3 space-y-2">
+      <a href="#hero" class="block py-2 text-sm font-semibold text-slate-300 hover:text-cyan-400">Home</a>
+      <a href="#thermal-insulation" class="block py-2 text-sm font-semibold text-slate-300 hover:text-cyan-400">Thermal Insulation (Ladakh Waste)</a>
+      <a href="#dash-ib" class="block py-2 text-sm font-semibold text-slate-300 hover:text-cyan-400">DASH-IB (Arcing Prevention)</a>
+      <a href="#radiation-shielding" class="block py-2 text-sm font-semibold text-slate-300 hover:text-cyan-400">Radiation Shielding (HAA/SHAA)</a>
+      <a href="#comparison" class="block py-2 text-sm font-semibold text-slate-300 hover:text-cyan-400">Comparison Matrix</a>
+      <a href="#roadmap" class="block py-2 text-sm font-semibold text-slate-300 hover:text-cyan-400">Roadmap</a>
+    </div>
+  </header>
+
+  <!-- ==========================================
+       MAIN CONTENT OVERLAY (SECTIONS 1 TO 5)
+       ========================================== -->
+  <main class="content-layer pt-20">
+
+    <!-- ==========================================
+         SECTION 1: HERO OVERVIEW
+         ========================================== -->
+    <section id="hero" class="min-h-[92vh] flex flex-col justify-center items-center px-4 sm:px-6 lg:px-8 text-center relative py-16">
+      <div class="max-w-4xl mx-auto space-y-6 p-8 sm:p-12 rounded-3xl bg-slate-950/65 backdrop-blur-xl border border-slate-700/60 shadow-2xl relative overflow-hidden">
+        <!-- Subtle ambient radial highlight inside hero card -->
+        <div class="absolute -top-24 -left-24 w-64 h-64 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute -bottom-24 -right-24 w-64 h-64 bg-amber-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+        <!-- Hackathon & Sustainability Badges -->
+        <div class="inline-flex flex-wrap items-center justify-center gap-2">
+          <span class="badge-tag bg-blue-500/30 text-blue-200 border border-blue-400/50 shadow-sm">
+            🏔️ High-Altitude Material Engineering
+          </span>
+          <span class="badge-tag bg-cyan-500/30 text-cyan-200 border border-cyan-400/50 shadow-sm">
+            ⚡ SIH Hackathon Prototype
+          </span>
+          <span class="badge-tag bg-purple-500/30 text-purple-200 border border-purple-400/50 shadow-sm">
+            🛡️ Radiation Hardening &amp; Fault Tolerance
+          </span>
+          <span class="badge-tag bg-emerald-500/30 text-emerald-200 border border-emerald-400/50 shadow-sm">
+            ♻️ Circular Bio-Economy
+          </span>
+        </div>
+
+        <!-- Main Hero Title with high-contrast text styling -->
+        <h1 class="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-[1.15] drop-shadow-[0_4px_12px_rgba(0,0,0,0.9)]">
+          <span class="text-white block">Sustainable &amp; High-Altitude</span>
+          <span class="gradient-text-gold block mt-1">Smart Material Engineering</span>
+        </h1>
+
+        <!-- Subtitle -->
+        <p class="text-base sm:text-lg text-slate-200 font-medium max-w-3xl mx-auto leading-relaxed drop-shadow-md">
+          Upcycled Waste Insulation for Cold Climates, Dynamic Self-Healing Conductors for Low-Pressure Environments, and Passive Radiation Shielding with Fault-Tolerant Architectures for HAA/SHAA Ladakh.
+        </p>
+
+        <!-- CTA Buttons -->
+        <div class="flex flex-wrap items-center justify-center gap-3 sm:gap-4 pt-2">
+          <a href="#thermal-insulation" class="px-5 py-3 rounded-xl font-bold text-xs sm:text-sm bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-400 hover:to-teal-500 text-slate-950 shadow-lg shadow-emerald-500/30 transition-all transform hover:-translate-y-0.5">
+            🐑 Thermal Insulation
+          </a>
+          <a href="#dash-ib" class="px-5 py-3 rounded-xl font-bold text-xs sm:text-sm bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-slate-950 shadow-lg shadow-cyan-500/30 transition-all transform hover:-translate-y-0.5">
+            ⚡ DASH-IB Technology
+          </a>
+          <a href="#radiation-shielding" class="px-5 py-3 rounded-xl font-bold text-xs sm:text-sm bg-gradient-to-r from-purple-500 to-indigo-600 hover:from-purple-400 hover:to-indigo-500 text-white shadow-lg shadow-purple-500/30 transition-all transform hover:-translate-y-0.5">
+            🛡️ Radiation Hardening
+          </a>
+          <a href="#chamber-demo" class="px-5 py-3 rounded-xl font-bold text-xs sm:text-sm bg-slate-900/90 hover:bg-slate-800 text-white border border-slate-600 transition-all shadow-md">
+            🔬 Chamber Sandbox
+          </a>
+        </div>
+
+        <!-- Interactive Dynamic Scroll Indicator -->
+        <div class="pt-4 flex flex-col items-center justify-center cursor-pointer" onclick="document.getElementById('thermal-insulation').scrollIntoView({behavior: 'smooth'})">
+          <span class="text-[11px] font-semibold tracking-wider uppercase text-cyan-300 mb-1.5 drop-shadow">
+            Scroll down to transform Day into Night &amp; watch sheep move →
+          </span>
+          <div class="w-6 h-10 rounded-full border-2 border-cyan-400/60 flex justify-center p-1">
+            <div class="w-1.5 h-2 bg-cyan-400 rounded-full animate-soft-bounce"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ==========================================
+         SECTION 2: COLD-CLIMATE THERMAL PROTECTION
+         ========================================== -->
+    <section id="thermal-insulation" class="py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-16">
+      <!-- Section Header -->
+      <div class="text-center max-w-3xl mx-auto space-y-3">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-emerald-500/20 text-emerald-300 border border-emerald-500/40">
+          Innovation 01 • Ladakh Waste Upcycling
+        </div>
+        <h2 class="text-3xl sm:text-5xl font-black text-white">
+          Cold-Climate Thermal Protection
+        </h2>
+        <p class="text-slate-300 text-base leading-relaxed">
+          Transforming discarded coarse sheep wool and post-industrial denim/cotton scraps into high-performance thermal insulation for sub-zero Himalayan battery banks and electronics enclosures.
+        </p>
+      </div>
+
+      <!-- Statistical Metrics Cards -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- Card 1: Thermal Conductivity -->
+        <div class="glass-panel glass-panel-hover p-6 rounded-2xl border-emerald-500/30 relative overflow-hidden">
+          <div class="text-xs font-mono font-bold text-emerald-400 uppercase tracking-wider mb-1">Heat Transfer Coefficient</div>
+          <div class="text-sm font-semibold text-slate-300 mb-2">Thermal Conductivity ($\lambda$)</div>
+          <div class="text-3xl sm:text-4xl font-black text-white mb-2">
+            <span class="rendered-math">\(0.035 - 0.040 \text{ W/m}\cdot\text{K}\)</span>
+            <span class="raw-math-view raw-latex hidden">0.035 - 0.040 W/m·K</span>
+          </div>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Comparable to synthetic expanded polystyrene (EPS), locking microscopic dead-air pockets to inhibit conduction and convection in Ladakh winters (down to -40°C).
+          </p>
+        </div>
+
+        <!-- Card 2: Moisture Absorption -->
+        <div class="glass-panel glass-panel-hover p-6 rounded-2xl border-cyan-500/30 relative overflow-hidden">
+          <div class="text-xs font-mono font-bold text-cyan-400 uppercase tracking-wider mb-1">Hygroscopic Regulation</div>
+          <div class="text-sm font-semibold text-slate-300 mb-2">Moisture Absorption Capacity</div>
+          <div class="text-3xl sm:text-4xl font-black text-cyan-300 mb-2">
+            Up to 30%
+          </div>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Absorbs water vapor into fiber cortex without thermal degradation or freezing into solid ice crystals, preventing internal condensation shorts on electronics.
+          </p>
+        </div>
+
+        <!-- Card 3: Cost Reduction -->
+        <div class="glass-panel glass-panel-hover p-6 rounded-2xl border-amber-500/30 relative overflow-hidden">
+          <div class="text-xs font-mono font-bold text-amber-400 uppercase tracking-wider mb-1">Circular Economics</div>
+          <div class="text-sm font-semibold text-slate-300 mb-2">Cost Reduction vs. Commercial</div>
+          <div class="text-3xl sm:text-4xl font-black text-amber-300 mb-2">
+            ~90% Lower
+          </div>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Directly utilizes unmarketable coarse wool and factory offcuts to achieve production costs of ~$1.00–$1.30/m² versus $12.00–$20.00/m² for commercial panels.
+          </p>
+        </div>
+      </div>
+
+      <!-- Material Properties & Core Functions -->
+      <div class="space-y-6">
+        <h3 class="text-2xl font-bold text-white flex items-center gap-2">
+          <span class="text-cyan-400">🔬</span> Material Properties &amp; Core Functions
+        </h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div class="p-5 rounded-xl bg-slate-900/70 border border-slate-700/60 glass-panel-hover">
+            <div class="w-10 h-10 rounded-lg bg-blue-500/20 text-blue-400 flex items-center justify-center text-xl mb-3">
+              ❄️
+            </div>
+            <h4 class="font-bold text-white text-base mb-2">Low Thermal Conductivity</h4>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Provides extreme thermal resistance per unit thickness, shielding high-altitude battery packs from premature thermal capacity decay and frozen electrolyte failure.
+            </p>
+          </div>
+
+          <div class="p-5 rounded-xl bg-slate-900/70 border border-slate-700/60 glass-panel-hover">
+            <div class="w-10 h-10 rounded-lg bg-cyan-500/20 text-cyan-400 flex items-center justify-center text-xl mb-3">
+              💧
+            </div>
+            <h4 class="font-bold text-white text-base mb-2">Passive Moisture Regulation</h4>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Wool's unique semi-permeable cuticle dynamically captures humidity during temperature drops and desorbs it during daytime thaw without sacrificing thermal $R$-value.
+            </p>
+          </div>
+
+          <div class="p-5 rounded-xl bg-slate-900/70 border border-slate-700/60 glass-panel-hover">
+            <div class="w-10 h-10 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-xl mb-3">
+              📳
+            </div>
+            <h4 class="font-bold text-white text-base mb-2">Vibration &amp; Shock Absorption</h4>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Crimped wool-denim fiber matrix acts as an acoustic and mechanical dampener, isolating sensitive telemetry boards from high-frequency drone propeller vibrations.
+            </p>
+          </div>
+
+          <div class="p-5 rounded-xl bg-slate-900/70 border border-slate-700/60 glass-panel-hover">
+            <div class="w-10 h-10 rounded-lg bg-amber-500/20 text-amber-400 flex items-center justify-center text-xl mb-3">
+              🔥
+            </div>
+            <h4 class="font-bold text-white text-base mb-2">Inherent Flame Retardancy</h4>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              High keratin nitrogen and moisture content confers high Limiting Oxygen Index
+              <span class="rendered-math">\((\text{LOI} \approx 25-26\%)\)</span>
+              <span class="raw-math-view raw-latex hidden">(LOI ≈ 25-26%)</span>, extinguishing flames without toxic halogenated additives.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step-by-Step Implementation Protocol (Interactive Horizontal Timeline) -->
+      <div class="space-y-6">
+        <div class="flex flex-wrap items-center justify-between gap-4">
+          <div>
+            <h3 class="text-2xl font-bold text-white flex items-center gap-2">
+              <span class="text-emerald-400">📋</span> Step-by-Step Implementation Protocol
+            </h3>
+            <p class="text-xs text-slate-400">Interactive roadmap from raw agricultural waste to finished hydrophobic felted composite.</p>
+          </div>
+          <!-- Navigation buttons -->
+          <div class="flex items-center gap-2">
+            <button id="btn-timeline-prev" class="px-3 py-1.5 rounded-lg bg-slate-800 text-xs font-bold text-slate-200 hover:bg-slate-700 border border-slate-700 transition-all">
+              ← Previous Step
+            </button>
+            <button id="btn-timeline-next" class="px-3 py-1.5 rounded-lg bg-cyan-600 text-xs font-bold text-white hover:bg-cyan-500 border border-cyan-500 transition-all">
+              Next Step →
+            </button>
+          </div>
+        </div>
+
+        <!-- Horizontal Stepper Bar -->
+        <div class="relative py-4">
+          <div class="absolute top-1/2 left-4 right-4 h-1 bg-slate-800 -translate-y-1/2 rounded-full"></div>
+          <div class="relative flex justify-between items-center max-w-4xl mx-auto px-4">
+            <button class="timeline-node w-11 h-11 rounded-full bg-slate-800 border-2 border-slate-600 text-white font-bold text-xs flex items-center justify-center z-10 transition-all hover:scale-110" data-step="0">1</button>
+            <button class="timeline-node w-11 h-11 rounded-full bg-slate-800 border-2 border-slate-600 text-white font-bold text-xs flex items-center justify-center z-10 transition-all hover:scale-110" data-step="1">2</button>
+            <button class="timeline-node w-11 h-11 rounded-full bg-slate-800 border-2 border-slate-600 text-white font-bold text-xs flex items-center justify-center z-10 transition-all hover:scale-110" data-step="2">3</button>
+            <button class="timeline-node w-11 h-11 rounded-full bg-slate-800 border-2 border-slate-600 text-white font-bold text-xs flex items-center justify-center z-10 transition-all hover:scale-110" data-step="3">4</button>
+            <button class="timeline-node w-11 h-11 rounded-full bg-slate-800 border-2 border-slate-600 text-white font-bold text-xs flex items-center justify-center z-10 transition-all hover:scale-110" data-step="4">5</button>
+          </div>
+        </div>
+
+        <!-- Active Step Detail Card -->
+        <div id="timeline-detail-card" class="glass-panel p-6 sm:p-8 rounded-2xl border-cyan-500/30 transition-all">
+          <!-- Populated by app.js -->
+        </div>
+      </div>
+
+      <!-- Cost Analysis & Economics Table -->
+      <div class="space-y-6">
+        <div class="flex flex-wrap items-center justify-between gap-4">
+          <div>
+            <h3 class="text-2xl font-bold text-white flex items-center gap-2">
+              <span class="text-amber-400">💰</span> Cost Analysis &amp; Production Economics
+            </h3>
+            <p class="text-xs text-slate-400">
+              Bill of Materials for <span class="text-cyan-300 font-bold">\(1\text{ m}^2\)</span> (20 mm thick felted mat, nominal density \(\approx 800 - 1000\text{ g/m}^2\)).
+            </p>
+          </div>
+
+          <!-- Currency Switcher Toggle -->
+          <div class="inline-flex items-center p-1 bg-slate-900 rounded-xl border border-slate-700">
+            <button class="currency-toggle-btn px-3 py-1.5 text-xs font-bold rounded-lg transition-all bg-emerald-600 text-white" data-currency="USD">
+              USD ($)
+            </button>
+            <button class="currency-toggle-btn px-3 py-1.5 text-xs font-bold rounded-lg transition-all text-slate-400 hover:text-white" data-currency="INR">
+              INR (₹)
+            </button>
+          </div>
+        </div>
+
+        <!-- Table Container -->
+        <div class="glass-panel rounded-2xl overflow-hidden border-slate-700/80">
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-sm border-collapse">
+              <thead>
+                <tr class="bg-slate-900/90 border-b border-slate-700 text-xs font-bold text-slate-300 uppercase tracking-wider">
+                  <th class="p-4 sm:p-5">Process / Material Component</th>
+                  <th class="p-4 sm:p-5">Quantity Required (per \(1\text{ m}^2\))</th>
+                  <th class="p-4 sm:p-5">Unit Cost Basis</th>
+                  <th class="p-4 sm:p-5 text-right currency-unit-label">Total Cost (USD)</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-800 text-slate-300">
+                <tr class="hover:bg-slate-800/40 transition-colors">
+                  <td class="p-4 sm:p-5 font-semibold text-white flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-amber-400"></span> Coarse Sheep Wool (Agri-Waste)
+                  </td>
+                  <td class="p-4 sm:p-5 font-mono text-xs">~600 g</td>
+                  <td class="p-4 sm:p-5 font-mono text-xs">$0.80 / kg</td>
+                  <td id="cost-wool" class="p-4 sm:p-5 text-right font-mono font-bold text-emerald-400">$0.48</td>
+                </tr>
+                <tr class="hover:bg-slate-800/40 transition-colors">
+                  <td class="p-4 sm:p-5 font-semibold text-white flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-blue-400"></span> Shredded Textile Scrap (Denim/Cotton)
+                  </td>
+                  <td class="p-4 sm:p-5 font-mono text-xs">~400 g</td>
+                  <td class="p-4 sm:p-5 font-mono text-xs">$0.25 / kg</td>
+                  <td id="cost-scrap" class="p-4 sm:p-5 text-right font-mono font-bold text-emerald-400">$0.10</td>
+                </tr>
+                <tr class="hover:bg-slate-800/40 transition-colors">
+                  <td class="p-4 sm:p-5 font-semibold text-white flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-teal-400"></span> Borax (Fire / Mold Treatment)
+                  </td>
+                  <td class="p-4 sm:p-5 font-mono text-xs">~30 g</td>
+                  <td class="p-4 sm:p-5 font-mono text-xs">$1.20 / kg</td>
+                  <td id="cost-borax" class="p-4 sm:p-5 text-right font-mono font-bold text-emerald-400">$0.04</td>
+                </tr>
+                <tr class="hover:bg-slate-800/40 transition-colors">
+                  <td class="p-4 sm:p-5 font-semibold text-white flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-cyan-400"></span> Scouring Agent &amp; Water
+                  </td>
+                  <td class="p-4 sm:p-5 font-mono text-xs">Utility rate</td>
+                  <td class="p-4 sm:p-5 font-mono text-xs">Operational</td>
+                  <td id="cost-scour" class="p-4 sm:p-5 text-right font-mono font-bold text-emerald-400">$0.05</td>
+                </tr>
+                <tr class="hover:bg-slate-800/40 transition-colors">
+                  <td class="p-4 sm:p-5 font-semibold text-white flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-purple-400"></span> Processing Energy (Milling &amp; Needling)
+                  </td>
+                  <td class="p-4 sm:p-5 font-mono text-xs">Operational energy</td>
+                  <td class="p-4 sm:p-5 font-mono text-xs">Operational</td>
+                  <td id="cost-energy" class="p-4 sm:p-5 text-right font-mono font-bold text-emerald-400">$0.35</td>
+                </tr>
+                <!-- Total Row -->
+                <tr class="bg-slate-900/80 font-bold border-t-2 border-cyan-500/40 text-white">
+                  <td class="p-4 sm:p-5 text-base">Total Production Cost per \(1\text{ m}^2\)</td>
+                  <td class="p-4 sm:p-5 font-mono text-xs text-slate-400">—</td>
+                  <td class="p-4 sm:p-5 font-mono text-xs text-slate-400">—</td>
+                  <td id="cost-total" class="p-4 sm:p-5 text-right font-mono text-lg font-black text-cyan-300">~$1.00 - $1.30</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Highlight Comparison Callout -->
+          <div class="p-4 sm:p-5 bg-gradient-to-r from-emerald-950/60 to-cyan-950/60 border-t border-emerald-500/30 flex flex-wrap items-center justify-between gap-4">
+            <div class="space-y-1">
+              <span class="text-xs font-bold uppercase tracking-wider text-emerald-400">Market Disruption Advantage:</span>
+              <p class="text-xs text-slate-300">
+                Standard commercial sheep wool panels retail between <strong class="text-white">$12.00 and $20.00 per \(\text{m}^2\)</strong> (₹1,000 - ₹1,650). This localized upcycling model yields an unprecedented <strong class="text-emerald-300">~90% cost advantage</strong>.
+              </p>
+            </div>
+            <div class="px-4 py-2 rounded-xl bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 font-bold text-xs uppercase tracking-wide">
+              90% Cost Saving
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ==========================================
+         SECTION 3: DASH-IB CONDUCTOR TECHNOLOGY
+         ========================================== -->
+    <section id="dash-ib" class="py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-16">
+      <!-- Section Header -->
+      <div class="text-center max-w-3xl mx-auto space-y-3">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-cyan-500/20 text-cyan-300 border border-cyan-500/40">
+          Innovation 02 • SIH Hackathon Prototype
+        </div>
+        <h2 class="text-3xl sm:text-5xl font-black text-white">
+          DASH-IB Conductor Technology
+        </h2>
+        <p class="text-slate-300 text-base leading-relaxed">
+          Dynamic Self-Healing Dielectric Architecture with Electrohydrodynamic (EHD) Field Deflector Mesh preventing corona discharge in low-pressure aerospace and high-altitude drone environments.
+        </p>
+      </div>
+
+      <!-- Problem Statement & Governing Physics (Paschen's Law) -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        <!-- Left 6 Cols: Governing Physics & KaTeX Formula -->
+        <div class="lg:col-span-6 space-y-6">
+          <div class="glass-panel p-6 sm:p-7 rounded-2xl border-cyan-500/30 space-y-4">
+            <h3 class="text-xl font-bold text-white flex items-center gap-2">
+              <span>⚡</span> Problem Statement &amp; Governing Physics
+            </h3>
+            <p class="text-sm text-slate-300 leading-relaxed">
+              In low-pressure environments (high-altitude UAVs, near-space balloons, aerospace satellites), gas density drops precipitously. This dramatically lengthens the electron mean free path (\(\lambda_e\)), allowing free electrons to gain destructive kinetic energy and trigger Townsend electron avalanches (arcing) at surprisingly low voltages.
+            </p>
+
+            <!-- Paschen's Law Equation Box -->
+            <div class="math-formula-box space-y-2">
+              <span class="text-xs font-mono uppercase font-bold text-cyan-400 block tracking-wider">
+                Paschen's Law Equation
+              </span>
+
+              <!-- KaTeX Rendered Formula -->
+              <div class="rendered-math text-lg sm:text-xl text-center py-2 text-white overflow-x-auto">
+                $$V_B = \frac{B \cdot p \cdot d}{\ln(A \cdot p \cdot d) - \ln\left(\ln\left(1 + \frac{1}{\gamma_{se}}\right)\right)}$$
+              </div>
+
+              <!-- Raw LaTeX Formula View -->
+              <div class="raw-math-view raw-latex hidden p-2 bg-slate-950 rounded border border-slate-800">
+V_B = \frac{B \cdot p \cdot d}{\ln(A \cdot p \cdot d) - \ln\left(\ln\left(1 + \frac{1}{\gamma_{se}}\right)\right)}
+              </div>
+
+              <div class="text-xs text-slate-400 space-y-1 pt-1 border-t border-slate-800">
+                <p>Where:</p>
+                <ul class="grid grid-cols-1 sm:grid-cols-2 gap-1 text-[11px] font-mono text-slate-300">
+                  <li>• <strong class="text-cyan-300">V_B</strong>: Breakdown Voltage (V)</li>
+                  <li>• <strong class="text-cyan-300">p</strong>: Ambient Pressure (atm / Torr)</li>
+                  <li>• <strong class="text-cyan-300">d</strong>: Defect Gap Distance (cm)</li>
+                  <li>• <strong class="text-cyan-300">\gamma_{se}</strong>: 2nd Electron Emission Coeff</li>
+                  <li>• <strong class="text-cyan-300">A, B</strong>: Composition gas constants</li>
+                </ul>
+              </div>
+            </div>
+
+            <p class="text-xs text-slate-400 leading-relaxed">
+              Standard aerospace insulation (PTFE, polyimide) suffers from micro-cracks under thermal flexing. Once a 0.5 mm void forms, ambient sub-atmospheric air ionizes into a conductive plasma channel, leading to catastrophic short-circuits.
+            </p>
+          </div>
+        </div>
+
+        <!-- Right 6 Cols: Interactive Paschen Breakdown Calculator & Curve -->
+        <div class="lg:col-span-6 glass-panel p-6 rounded-2xl border-slate-700/80 space-y-4">
+          <div class="flex items-center justify-between">
+            <h4 class="text-sm font-bold uppercase tracking-wider text-cyan-400">Interactive Paschen Breakdown Curve</h4>
+            <div id="paschen-risk-badge">
+              <!-- Risk badge generated dynamically -->
+            </div>
+          </div>
+
+          <!-- Canvas for Paschen U-Curve -->
+          <div class="bg-slate-950/80 p-2 rounded-xl border border-slate-800">
+            <canvas id="paschen-curve-canvas" class="w-full h-56 block"></canvas>
+          </div>
+
+          <!-- Controls: Sliders for Pressure and Gap -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+            <div class="space-y-1.5">
+              <div class="flex justify-between text-xs">
+                <span class="text-slate-400 font-semibold">Chamber Pressure (\(p\)):</span>
+                <span id="paschen-pressure-val" class="font-mono text-cyan-300 font-bold">0.25 atm (25.3 kPa)</span>
+              </div>
+              <input type="range" id="paschen-pressure" min="0.02" max="1.0" step="0.01" value="0.25" class="w-full">
+              <span class="text-[10px] text-slate-500 block">Ladakh drone cruise (~3000–5000m) ≈ 0.25–0.4 atm</span>
+            </div>
+
+            <div class="space-y-1.5">
+              <div class="flex justify-between text-xs">
+                <span class="text-slate-400 font-semibold">Defect Gap (\(d\)):</span>
+                <span id="paschen-distance-val" class="font-mono text-cyan-300 font-bold">1.5 mm</span>
+              </div>
+              <input type="range" id="paschen-distance" min="0.2" max="5.0" step="0.1" value="1.5" class="w-full">
+              <span class="text-[10px] text-slate-500 block">Typical micro-fissure defect width</span>
+            </div>
+          </div>
+
+          <!-- Real-Time Breakdown Comparison Cards -->
+          <div class="grid grid-cols-2 gap-3 pt-2">
+            <div class="p-3 rounded-xl bg-red-950/40 border border-red-500/30 text-center">
+              <span class="text-[11px] uppercase font-bold text-red-400 block">Standard Wire Breakdown</span>
+              <span id="paschen-vb-standard" class="text-xl font-mono font-black text-red-300">-- V</span>
+            </div>
+            <div class="p-3 rounded-xl bg-cyan-950/40 border border-cyan-500/30 text-center">
+              <span class="text-[11px] uppercase font-bold text-cyan-400 block">DASH-IB Novel Breakdown</span>
+              <span id="paschen-vb-dash" class="text-xl font-mono font-black text-cyan-300">-- V</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- DASH-IB Multi-Layer Architecture (Interactive Cross-Section Diagram) -->
+      <div class="space-y-6">
+        <div class="text-center max-w-2xl mx-auto space-y-2">
+          <h3 class="text-2xl sm:text-3xl font-black text-white">
+            DASH-IB Multi-Layer Architecture
+          </h3>
+          <p class="text-xs sm:text-sm text-slate-300">
+            Click on any of the 4 concentric rings to reveal active chemistry, material synthesis, and self-healing mechanisms.
+          </p>
+        </div>
+
+        <!-- Render Container for Cross-Section Component -->
+        <div id="dash-ib-cross-section-container" class="glass-panel p-6 sm:p-8 rounded-3xl border-cyan-500/30">
+          <!-- Populated by simulators.js -->
+        </div>
+      </div>
+
+      <!-- SIH Hackathon Chamber Demonstration Protocol (Interactive Sandbox) -->
+      <div id="chamber-demo" class="space-y-6 pt-8">
+        <div class="flex flex-wrap items-center justify-between gap-4">
+          <div>
+            <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-red-500/20 text-red-300 border border-red-500/40 mb-1">
+              Live Test Benchmark
+            </div>
+            <h3 class="text-2xl sm:text-3xl font-black text-white">
+              SIH Hackathon Chamber Demonstration Protocol
+            </h3>
+            <p class="text-xs text-slate-400">
+              Interactive acrylic vacuum cylinder simulation (0.1–0.5 atm / 20–30 kPa) with step-up generator (5 kV–15 kV DC).
+            </p>
+          </div>
+
+          <!-- Controls: Power Generator Toggle & Audio FX -->
+          <div class="flex items-center gap-3">
+            <button id="chamber-audio-toggle" class="px-3 py-2 text-xs font-bold rounded-xl border border-slate-700 bg-slate-900 text-slate-300 hover:text-cyan-400 transition-all">
+              🔇 Audio FX: OFF
+            </button>
+            <button id="chamber-power-toggle" class="px-4 py-2 text-xs font-bold rounded-xl bg-red-600 hover:bg-red-500 text-white shadow-lg shadow-red-600/30 transition-all">
+              ⚡ Generator: ACTIVE
+            </button>
+          </div>
+        </div>
+
+        <!-- Chamber Sandbox Container -->
+        <div class="glass-panel p-6 rounded-3xl border-slate-700/80 space-y-6">
+          <!-- Wire Mode Tabs -->
+          <div class="flex flex-wrap items-center justify-between gap-3 border-b border-slate-800 pb-4">
+            <div class="flex items-center gap-2">
+              <span class="text-xs font-bold uppercase tracking-wider text-slate-400">Chamber View:</span>
+              <div class="inline-flex p-1 bg-slate-900 rounded-xl border border-slate-800 text-xs">
+                <button class="chamber-wire-tab px-3 py-1.5 rounded-lg font-bold transition-all active bg-blue-600 text-white" data-wire="split">
+                  Dual Split View (PVC vs DASH-IB)
+                </button>
+                <button class="chamber-wire-tab px-3 py-1.5 rounded-lg font-bold transition-all text-slate-400 hover:text-white" data-wire="standard">
+                  Standard PVC Wire Only
+                </button>
+                <button class="chamber-wire-tab px-3 py-1.5 rounded-lg font-bold transition-all text-slate-400 hover:text-white" data-wire="dash">
+                  DASH-IB Cable Only
+                </button>
+              </div>
+            </div>
+
+            <!-- 0.5mm Defect Toggle -->
+            <label class="flex items-center gap-2 text-xs font-semibold text-slate-300 cursor-pointer">
+              <input type="checkbox" id="chamber-defect-toggle" checked class="w-4 h-4 rounded text-cyan-500 focus:ring-cyan-400">
+              <span>Simulate 0.5 mm Surface Defect Scratch</span>
+            </label>
+          </div>
+
+          <!-- Canvas Chamber Graphic -->
+          <div class="relative w-full rounded-2xl overflow-hidden border border-cyan-500/20 shadow-2xl">
+            <canvas id="vacuum-chamber-canvas" class="w-full h-80 sm:h-96 block"></canvas>
+          </div>
+
+          <!-- Sliders: Voltage & Pressure -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 bg-slate-900/60 p-5 rounded-2xl border border-slate-800">
+            <div class="space-y-2">
+              <div class="flex justify-between text-xs">
+                <span class="text-slate-300 font-semibold">DC Step-Up Voltage Generator:</span>
+                <span id="chamber-voltage-val" class="font-mono text-red-400 font-bold">10.0 kV</span>
+              </div>
+              <input type="range" id="chamber-voltage" min="0" max="15" step="0.5" value="10" class="w-full accent-red-500">
+              <span class="text-[10px] text-slate-400 block">Demonstrates dielectric breakdown above threshold</span>
+            </div>
+
+            <div class="space-y-2">
+              <div class="flex justify-between text-xs">
+                <span class="text-slate-300 font-semibold">Vacuum Chamber Pressure Dial:</span>
+                <span id="chamber-pressure-val" class="font-mono text-cyan-300 font-bold">0.25 atm (25 kPa)</span>
+              </div>
+              <input type="range" id="chamber-pressure" min="0.05" max="1.0" step="0.05" value="0.25" class="w-full accent-cyan-500">
+              <span class="text-[10px] text-slate-400 block">Drag left to decrease pressure towards near-space altitudes</span>
+            </div>
+          </div>
+
+          <!-- Observations Card -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+            <div class="p-4 rounded-xl bg-red-950/30 border border-red-500/30 space-y-1">
+              <span class="font-bold text-red-400 uppercase tracking-wider block">Observed: Standard PVC Wire</span>
+              <p class="text-slate-300 leading-relaxed">
+                At 0.25 atm and 10 kV, Townsend avalanche triggers violent blue corona sparks across the 0.5 mm gap. The polymer matrix suffers irreversible carbonization and continuous short-circuit arcing.
+              </p>
+            </div>
+            <div class="p-4 rounded-xl bg-cyan-950/30 border border-cyan-500/30 space-y-1">
+              <span class="font-bold text-cyan-400 uppercase tracking-wider block">Observed: DASH-IB Novel Cable</span>
+              <p class="text-slate-300 leading-relaxed">
+                Complete suppression of ionization! The outer conductive graphite mesh diffuses localized electric field gradients (\(\nabla E\)), while the piezo-chemical bio-gel migrates via electro-osmosis to seal the defect.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ==========================================
+         SECTION 3: PASSIVE RADIATION SHIELDING & FAULT-TOLERANT DESIGN
+         ========================================== -->
+    <section id="radiation-shielding" class="py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-16">
+      <!-- Section Header -->
+      <div class="text-center max-w-3xl mx-auto space-y-3">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-purple-500/20 text-purple-300 border border-purple-500/40">
+          Innovation 03 • Cosmic &amp; UV Hardening
+        </div>
+        <h2 class="text-3xl sm:text-5xl font-black text-white">
+          Passive Radiation Shielding &amp; Fault-Tolerant Design
+        </h2>
+        <p class="text-slate-300 text-base leading-relaxed">
+          Protecting High Altitude (HAA) and Super High Altitude (SHAA) electronic systems in the Ladakh region from solar UV, atmospheric cosmic secondary neutrons, and Single-Event Upsets (SEUs).
+        </p>
+      </div>
+
+      <!-- Problem Statement & Regional Context (HAA & SHAA Ladakh) -->
+      <div class="glass-panel p-6 sm:p-8 rounded-3xl border-purple-500/30 space-y-6">
+        <div class="max-w-3xl">
+          <span class="text-xs font-mono font-bold text-purple-400 uppercase tracking-wider block mb-1">Operating Environment • HAA &amp; SHAA Ladakh</span>
+          <h3 class="text-2xl font-bold text-white mb-2">Thinner Atmospheric Shielding &amp; High-Altitude Electronic Hazards</h3>
+          <p class="text-sm text-slate-300 leading-relaxed">
+            High Altitude Areas (HAA) and Super High Altitude Areas (SHAA) of the Ladakh region (3,000 m to 5,500 m+) present one of the harshest operating environments on Earth for electronic equipment. A substantially thinner atmospheric air column attenuates less solar ultraviolet flux and cosmic ray showers. Consequently, sensitive semiconductor junctions and embedded firmware experience severe radiation-induced anomalies:
+          </p>
+        </div>
+
+        <!-- 4 Hazard Cards -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div class="p-4 rounded-xl bg-slate-900/80 border border-slate-700/60 glass-panel-hover space-y-2">
+            <div class="w-8 h-8 rounded-lg bg-red-500/20 text-red-400 flex items-center justify-center font-bold text-xs font-mono">
+              01
+            </div>
+            <h4 class="font-bold text-white text-sm">Single-Event Upsets (SEUs)</h4>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Cosmic neutron strikes ionize silicon channels, unexpectedly flipping bits in CPU registers, RAM, or flash memory.
+            </p>
+          </div>
+
+          <div class="p-4 rounded-xl bg-slate-900/80 border border-slate-700/60 glass-panel-hover space-y-2">
+            <div class="w-8 h-8 rounded-lg bg-amber-500/20 text-amber-400 flex items-center justify-center font-bold text-xs font-mono">
+              02
+            </div>
+            <h4 class="font-bold text-white text-sm">MCU Crashes &amp; Resets</h4>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Corrupted program counters and neutron-induced latch-ups hang microcontrollers (e.g. ESP32) in unrecoverable infinite loops.
+            </p>
+          </div>
+
+          <div class="p-4 rounded-xl bg-slate-900/80 border border-slate-700/60 glass-panel-hover space-y-2">
+            <div class="w-8 h-8 rounded-lg bg-cyan-500/20 text-cyan-400 flex items-center justify-center font-bold text-xs font-mono">
+              03
+            </div>
+            <h4 class="font-bold text-white text-sm">Corrupted Sensor Readings</h4>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Transient radiation charge bursts generate unrealistic measurement spikes, tricking thermal controllers into false actuator triggers.
+            </p>
+          </div>
+
+          <div class="p-4 rounded-xl bg-slate-900/80 border border-slate-700/60 glass-panel-hover space-y-2">
+            <div class="w-8 h-8 rounded-lg bg-purple-500/20 text-purple-400 flex items-center justify-center font-bold text-xs font-mono">
+              04
+            </div>
+            <h4 class="font-bold text-white text-sm">Long-Term Degradation</h4>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Cumulative high-altitude UV flux yellows optical coatings, degrades elastomer seals, and embrittles external cabling jackets.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Field Deployments Across Ladakh: Valley, Ridge & High Pass Testbeds -->
+      <div id="field-deployments" class="space-y-6">
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-purple-500/30 pb-4">
+          <div>
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-purple-500/20 text-purple-300 border border-purple-500/40 mb-2">
+              <span>📷</span> Real-World Field Validation • HAA &amp; SHAA Testbeds
+            </div>
+            <h3 class="text-2xl sm:text-3xl font-black text-white">
+              Autonomous Enclosures in the Ladakh Valley &amp; Mountain Passes
+            </h3>
+            <p class="text-xs sm:text-sm text-slate-300 max-w-2xl mt-1">
+              Field deployment stations across diverse micro-climates (3,500 m to 5,359 m MSL), validating passive UV/solar heat rejection, sub-zero mechanical toughness, and zero cosmic-ray SEU downtime.
+            </p>
+          </div>
+          <span class="text-xs font-mono text-purple-400 bg-purple-950/40 border border-purple-500/30 px-3 py-1.5 rounded-lg whitespace-nowrap self-start md:self-auto">
+            Click any photo to inspect full telemetry
+          </span>
+        </div>
+
+        <!-- 4-Card Deployment Gallery Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          
+          <!-- Card 1: Valley Pasture & Stream -->
+          <div class="deployment-card glass-panel rounded-2xl overflow-hidden border border-slate-700/70 hover:border-cyan-400/80 transition-all duration-300 group cursor-pointer flex flex-col"
+               onclick="openDeploymentLightbox(0)">
+            <div class="relative aspect-[16/10] overflow-hidden bg-slate-900">
+              <img src="asset/enclosure_valley_stream.jpg" 
+                   alt="Radiation-shielded electronic enclosure deployed on the green valley floor near a stream in Ladakh with grazing sheep" 
+                   class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+              <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent"></div>
+              <div class="absolute top-2.5 left-2.5">
+                <span class="px-2 py-0.5 rounded-full text-[10px] font-mono font-bold bg-emerald-500/90 text-slate-950 backdrop-blur-md shadow-sm">
+                  3,500 m MSL
+                </span>
+              </div>
+              <div class="absolute top-2.5 right-2.5">
+                <span class="px-2 py-0.5 rounded-full text-[10px] font-mono font-bold bg-slate-900/80 text-emerald-400 border border-emerald-500/40 backdrop-blur-md">
+                  Valley Pasture
+                </span>
+              </div>
+              <div class="absolute bottom-2.5 left-2.5 right-2.5 flex items-center justify-between text-[11px] font-mono text-slate-300">
+                <span class="text-emerald-300 font-semibold">☀️ Solar: 1,040 W/m²</span>
+                <span class="text-slate-400">T: +14.2°C</span>
+              </div>
+            </div>
+            <div class="p-4 flex-1 flex flex-col justify-between space-y-2.5">
+              <div>
+                <h4 class="font-bold text-white text-sm group-hover:text-cyan-300 transition-colors flex items-center gap-1.5">
+                  <span>🌊</span> Alpine Stream &amp; Valley Floor
+                </h4>
+                <p class="text-xs text-slate-400 mt-1 leading-relaxed">
+                  Installed on bedrock near the winding mountain stream with sheep grazing in lush pastures. Evaluates high-altitude diurnal humidity cycling and solar reflection off water surfaces.
+                </p>
+              </div>
+              <div class="pt-2 border-t border-slate-800/80 flex items-center justify-between text-[11px] font-mono">
+                <span class="text-cyan-400">Nubra Valley Basin</span>
+                <span class="text-slate-500 group-hover:text-cyan-300 transition-colors">Expand ↗</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 2: High-Altitude Rocky Ridge -->
+          <div class="deployment-card glass-panel rounded-2xl overflow-hidden border border-slate-700/70 hover:border-purple-400/80 transition-all duration-300 group cursor-pointer flex flex-col"
+               onclick="openDeploymentLightbox(1)">
+            <div class="relative aspect-[16/10] overflow-hidden bg-slate-900">
+              <img src="asset/enclosure_ridge_deployment.jpg" 
+                   alt="Autonomous radiation-shielded monitoring station on a rugged rocky mountain ridge overlooking Ladakh peaks" 
+                   class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+              <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent"></div>
+              <div class="absolute top-2.5 left-2.5">
+                <span class="px-2 py-0.5 rounded-full text-[10px] font-mono font-bold bg-purple-500/90 text-white backdrop-blur-md shadow-sm">
+                  4,800 m MSL
+                </span>
+              </div>
+              <div class="absolute top-2.5 right-2.5">
+                <span class="px-2 py-0.5 rounded-full text-[10px] font-mono font-bold bg-slate-900/80 text-purple-300 border border-purple-500/40 backdrop-blur-md">
+                  Rocky Ridge
+                </span>
+              </div>
+              <div class="absolute bottom-2.5 left-2.5 right-2.5 flex items-center justify-between text-[11px] font-mono text-slate-300">
+                <span class="text-purple-300 font-semibold">☀️ Solar: 1,180 W/m²</span>
+                <span class="text-slate-400">T: -4.8°C</span>
+              </div>
+            </div>
+            <div class="p-4 flex-1 flex flex-col justify-between space-y-2.5">
+              <div>
+                <h4 class="font-bold text-white text-sm group-hover:text-purple-300 transition-colors flex items-center gap-1.5">
+                  <span>🏔️</span> High-Altitude Rocky Ridge
+                </h4>
+                <p class="text-xs text-slate-400 mt-1 leading-relaxed">
+                  Bolted to solid granite crags on an exposed alpine ridge. Validates extreme solar UV-C/UV-B index (&gt;12.5) protection, heavy wind buffeting, and primary cosmic neutron shower flux.
+                </p>
+              </div>
+              <div class="pt-2 border-t border-slate-800/80 flex items-center justify-between text-[11px] font-mono">
+                <span class="text-purple-400">South Pullu Crag</span>
+                <span class="text-slate-500 group-hover:text-purple-300 transition-colors">Expand ↗</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 3: Sunset Alpenglow Terrace -->
+          <div class="deployment-card glass-panel rounded-2xl overflow-hidden border border-slate-700/70 hover:border-amber-400/80 transition-all duration-300 group cursor-pointer flex flex-col"
+               onclick="openDeploymentLightbox(2)">
+            <div class="relative aspect-[16/10] overflow-hidden bg-slate-900">
+              <img src="asset/enclosure_sunset_alpenglow.jpg" 
+                   alt="High-altitude electronic station on stone terrace during sunset alpenglow in Ladakh mountains" 
+                   class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+              <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent"></div>
+              <div class="absolute top-2.5 left-2.5">
+                <span class="px-2 py-0.5 rounded-full text-[10px] font-mono font-bold bg-amber-500/90 text-slate-950 backdrop-blur-md shadow-sm">
+                  4,200 m MSL
+                </span>
+              </div>
+              <div class="absolute top-2.5 right-2.5">
+                <span class="px-2 py-0.5 rounded-full text-[10px] font-mono font-bold bg-slate-900/80 text-amber-300 border border-amber-500/40 backdrop-blur-md">
+                  Sunset Terrace
+                </span>
+              </div>
+              <div class="absolute bottom-2.5 left-2.5 right-2.5 flex items-center justify-between text-[11px] font-mono text-slate-300">
+                <span class="text-amber-300 font-semibold">🌇 Alpenglow</span>
+                <span class="text-slate-400">T: -8.1°C</span>
+              </div>
+            </div>
+            <div class="p-4 flex-1 flex flex-col justify-between space-y-2.5">
+              <div>
+                <h4 class="font-bold text-white text-sm group-hover:text-amber-300 transition-colors flex items-center gap-1.5">
+                  <span>🌇</span> Sunset Alpenglow Terrace
+                </h4>
+                <p class="text-xs text-slate-400 mt-1 leading-relaxed">
+                  Perched on a mountain terrace overlooking sunset peaks. Validates acute diurnal thermal shock (+22°C to -15°C in 90 min) and elastomeric compliance of the acrylic-silane primer tie layer.
+                </p>
+              </div>
+              <div class="pt-2 border-t border-slate-800/80 flex items-center justify-between text-[11px] font-mono">
+                <span class="text-amber-400">Chang La Foothills</span>
+                <span class="text-slate-500 group-hover:text-amber-300 transition-colors">Expand ↗</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 4: Khardung La Snow Pass -->
+          <div class="deployment-card glass-panel rounded-2xl overflow-hidden border border-slate-700/70 hover:border-blue-400/80 transition-all duration-300 group cursor-pointer flex flex-col"
+               onclick="openDeploymentLightbox(3)">
+            <div class="relative aspect-[16/10] overflow-hidden bg-slate-900">
+              <img src="asset/enclosure_winter_pass.jpg" 
+                   alt="Enclosure station operating in deep winter snow and frost at Khardung La Pass in Ladakh" 
+                   class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+              <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent"></div>
+              <div class="absolute top-2.5 left-2.5">
+                <span class="px-2 py-0.5 rounded-full text-[10px] font-mono font-bold bg-blue-500/90 text-white backdrop-blur-md shadow-sm">
+                  5,359 m MSL
+                </span>
+              </div>
+              <div class="absolute top-2.5 right-2.5">
+                <span class="px-2 py-0.5 rounded-full text-[10px] font-mono font-bold bg-slate-900/80 text-blue-300 border border-blue-500/40 backdrop-blur-md">
+                  Snow Pass
+                </span>
+              </div>
+              <div class="absolute bottom-2.5 left-2.5 right-2.5 flex items-center justify-between text-[11px] font-mono text-slate-300">
+                <span class="text-blue-300 font-semibold">❄️ Cryogenic Cold</span>
+                <span class="text-slate-400">T: -24.5°C</span>
+              </div>
+            </div>
+            <div class="p-4 flex-1 flex flex-col justify-between space-y-2.5">
+              <div>
+                <h4 class="font-bold text-white text-sm group-hover:text-blue-300 transition-colors flex items-center gap-1.5">
+                  <span>❄️</span> Khardung La Summit Snow Pass
+                </h4>
+                <p class="text-xs text-slate-400 mt-1 leading-relaxed">
+                  Operating amidst snow drifts and rime frost under intense cosmic neutron flux. Demonstrates cryogenic PC/ASA fracture toughness and borated HDPE neutron capture with zero latch-ups.
+                </p>
+              </div>
+              <div class="pt-2 border-t border-slate-800/80 flex items-center justify-between text-[11px] font-mono">
+                <span class="text-blue-400">Khardung La Summit</span>
+                <span class="text-slate-500 group-hover:text-blue-300 transition-colors">Expand ↗</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Core Design Principles (4 Pillars) -->
+      <div class="space-y-6">
+        <h3 class="text-2xl font-bold text-white flex items-center gap-2">
+          <span class="text-purple-400">⚙️</span> Core Engineering Design Principles
+        </h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="p-6 rounded-2xl bg-slate-900/70 border border-slate-700/60 glass-panel-hover space-y-3">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-xl bg-cyan-500/20 text-cyan-400 flex items-center justify-center text-xl font-bold">
+                ☀️
+              </div>
+              <div>
+                <h4 class="font-bold text-white text-base">1. Primary UV Shielding &amp; Heat Rejection</h4>
+                <span class="text-xs text-cyan-400 font-mono">Hybrid PMMA + Rutile TiO₂ / ZnO Nanoparticles</span>
+              </div>
+            </div>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              A hybrid PMMA-based thin-film coating incorporating surface-passivated rutile \(\text{TiO}_2\) and \(\text{ZnO}\) nanoparticles. Wide semiconductor bandgaps (\(E_g \approx 3.2-3.4\text{ eV}\)) absorb and scatter incident UV-C, UV-B, and UV-A while reflecting visible and near-infrared (NIR) solar radiation. This prevents UV degradation of the enclosure and dramatically lowers solar heat loads in mountain sunlight.
+            </p>
+          </div>
+
+          <div class="p-6 rounded-2xl bg-slate-900/70 border border-slate-700/60 glass-panel-hover space-y-3">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-xl bg-purple-500/20 text-purple-400 flex items-center justify-center text-xl font-bold">
+                🛡️
+              </div>
+              <div>
+                <h4 class="font-bold text-white text-base">2. Structural Weatherable Shell</h4>
+                <span class="text-xs text-purple-400 font-mono">Opaque Pigmented PC/ASA Blend</span>
+              </div>
+            </div>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              An opaque, light-colored, pigmented polycarbonate/acrylonitrile styrene acrylate (PC/ASA) blend shell acts as the structural housing and secondary UV barrier. The saturated acrylate rubber phase of ASA confers exceptional weathering resistance and prevents yellowing vs. standard polycarbonate, while the PC component provides rigid impact strength and retains high fracture toughness at sub-zero cold (\(-40^\circ\text{C}\)).
+            </p>
+          </div>
+
+          <div class="p-6 rounded-2xl bg-slate-900/70 border border-slate-700/60 glass-panel-hover space-y-3">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center text-xl font-bold">
+                ⚛️
+              </div>
+              <div>
+                <h4 class="font-bold text-white text-base">3. Cosmic-Secondary Neutron Shielding</h4>
+                <span class="text-xs text-amber-400 font-mono">Borated HDPE Inner Vault (5–10% Boron)</span>
+              </div>
+            </div>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Borated high-density polyethylene (HDPE) lines the MCU and memory compartment. Atmospheric secondary neutrons dominate single-event upsets at altitude. High hydrogen content in the polyethylene moderates (slows) fast neutrons via elastic scattering collisions, after which Boron-10 (\({^{10}\text{B}}\)) captures them via \({^{10}\text{B}}(n, \alpha){^7\text{Li}}\) with negligible secondary gamma emission.
+            </p>
+          </div>
+
+          <div class="p-6 rounded-2xl bg-slate-900/70 border border-slate-700/60 glass-panel-hover space-y-3">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-xl font-bold">
+                🔄
+              </div>
+              <div>
+                <h4 class="font-bold text-white text-base">4. Watchdog Supervision &amp; Auto-Recovery</h4>
+                <span class="text-xs text-emerald-400 font-mono">Independent Hardware Timer + Scheduled Checksums</span>
+              </div>
+            </div>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Rather than attempting to predict stochastic radiation strikes, the system detects and recovers deterministically. An independent hardware watchdog supervises the ESP32, calibration and configuration registers are checked against stored checksums on a fixed schedule, and the controller resets autonomously into a verified safe state when a disturbance is detected.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Composite Layer Stack (Interactive Explorer & Technical Table) -->
+      <div class="space-y-6">
+        <div class="text-center max-w-2xl mx-auto space-y-2">
+          <h3 class="text-2xl sm:text-3xl font-black text-white">
+            Composite Layer Stack Architecture
+          </h3>
+          <p class="text-xs sm:text-sm text-slate-300">
+            Workable layer stack for the enclosure wall, ordered from the outer exposed surface inward to the electronics compartment.
+          </p>
+        </div>
+
+        <!-- Render Container for Interactive Layer Stack -->
+        <div id="radiation-layer-stack-container" class="glass-panel p-6 sm:p-8 rounded-3xl border-purple-500/30">
+          <!-- Populated by simulators.js -->
+        </div>
+
+        <!-- Full Technical Table -->
+        <div class="glass-panel rounded-2xl overflow-hidden border-slate-700/80">
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-sm border-collapse">
+              <thead>
+                <tr class="bg-slate-900/90 border-b border-slate-700 text-xs font-bold text-slate-300 uppercase tracking-wider">
+                  <th class="p-4 sm:p-5">Enclosure Layer</th>
+                  <th class="p-4 sm:p-5">Material Composition</th>
+                  <th class="p-4 sm:p-5">Recommended Thickness</th>
+                  <th class="p-4 sm:p-5">Functional Shielding Role</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-800 text-slate-300 text-xs sm:text-sm">
+                <tr class="hover:bg-slate-800/40 transition-colors">
+                  <td class="p-4 sm:p-5 font-bold text-white flex items-center gap-2">
+                    <span class="w-2.5 h-2.5 rounded-full bg-cyan-400"></span> Outer Layer
+                  </td>
+                  <td class="p-4 sm:p-5 font-mono text-xs text-cyan-300">
+                    Hybrid PMMA-based thin film with surface-passivated rutile TiO₂ and ZnO nanoparticles
+                  </td>
+                  <td class="p-4 sm:p-5 font-mono text-xs font-bold text-white">40–60 µm dry film</td>
+                  <td class="p-4 sm:p-5 text-slate-300 text-xs leading-relaxed">
+                    Absorbs and scatters incident UV; reflects visible and near-infrared (NIR) solar radiation to minimize thermal loading.
+                  </td>
+                </tr>
+
+                <tr class="hover:bg-slate-800/40 transition-colors">
+                  <td class="p-4 sm:p-5 font-bold text-white flex items-center gap-2">
+                    <span class="w-2.5 h-2.5 rounded-full bg-purple-400"></span> Intermediate Shell
+                  </td>
+                  <td class="p-4 sm:p-5 font-mono text-xs text-purple-300">
+                    Opaque, pigmented, weatherable PC/ASA blend
+                  </td>
+                  <td class="p-4 sm:p-5 font-mono text-xs font-bold text-white">5–10 mm structural wall</td>
+                  <td class="p-4 sm:p-5 text-slate-300 text-xs leading-relaxed">
+                    Provides structural enclosure protection; acts as secondary UV barrier reducing transmission of residual UV; retains high impact strength at -40°C.
+                  </td>
+                </tr>
+
+                <tr class="hover:bg-slate-800/40 transition-colors">
+                  <td class="p-4 sm:p-5 font-bold text-white flex items-center gap-2">
+                    <span class="w-2.5 h-2.5 rounded-full bg-emerald-400"></span> Interfacial Primer
+                  </td>
+                  <td class="p-4 sm:p-5 font-mono text-xs text-emerald-300">
+                    UV-stable acrylic-silane tie layer
+                  </td>
+                  <td class="p-4 sm:p-5 font-mono text-xs font-bold text-white">3–4 mm (min 2.5 mm)</td>
+                  <td class="p-4 sm:p-5 text-slate-300 text-xs leading-relaxed">
+                    Promotes adhesion between PMMA coating and PC/ASA shell; flexible formulation accommodates thermal-expansion mismatch during severe diurnal temperature swings.
+                  </td>
+                </tr>
+
+                <tr class="hover:bg-slate-800/40 transition-colors">
+                  <td class="p-4 sm:p-5 font-bold text-white flex items-center gap-2">
+                    <span class="w-2.5 h-2.5 rounded-full bg-amber-400"></span> Inner Neutron Liner
+                  </td>
+                  <td class="p-4 sm:p-5 font-mono text-xs text-amber-300">
+                    Borated HDPE (5–10% boron by weight) fitted around MCU &amp; memory compartment
+                  </td>
+                  <td class="p-4 sm:p-5 font-mono text-xs font-bold text-white">20 mm (range 10–20 mm)</td>
+                  <td class="p-4 sm:p-5 text-slate-300 text-xs leading-relaxed">
+                    Moderates (hydrogen atoms) and absorbs (boron) atmospheric secondary neutrons, mitigating neutron flux at the MCU, memory, and precision voltage references.
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Physical Radiation Behavior Flow -->
+      <div class="glass-panel p-6 sm:p-8 rounded-3xl border-slate-700/80 space-y-6">
+        <h3 class="text-xl sm:text-2xl font-bold text-white flex items-center gap-2">
+          <span>🔬</span> How This Behaves Physically
+        </h3>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs sm:text-sm">
+          <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800 space-y-2">
+            <span class="text-xs font-mono font-bold text-cyan-400 uppercase block">1. Solar UV &amp; Heat Reflection</span>
+            <p class="text-slate-300 leading-relaxed">
+              Solar UV, visible, and near-IR radiation strike the outer PMMA-based coating. Surface-passivated \(\text{TiO}_2\) and \(\text{ZnO}\) nanoparticles absorb and scatter the UV flux, while visible and near-IR wavelengths are largely reflected, preventing extreme solar overheating of the electronics enclosure.
+            </p>
+          </div>
+
+          <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800 space-y-2">
+            <span class="text-xs font-mono font-bold text-amber-400 uppercase block">2. Neutron Moderation &amp; Capture</span>
+            <p class="text-slate-300 leading-relaxed">
+              Atmospheric neutrons pass through the plastic shell and strike the 10–20 mm borated HDPE liner. Hydrogen atoms slow down lower-energy neutrons, and boron-10 captures them via \({^{10}\text{B}}(n,\alpha){^7\text{Li}}\) with minimal gamma emission, drastically reducing the single-event upset rate.
+            </p>
+          </div>
+
+          <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800 space-y-2">
+            <span class="text-xs font-mono font-bold text-emerald-400 uppercase block">3. Multi-Layer Complementation</span>
+            <p class="text-slate-300 leading-relaxed">
+              Because ultra-high-energy neutrons and muons partially penetrate shielding, physical liners are complemented with deterministic firmware supervision: periodic checksum validation, sensor validity checks, and watchdog auto-recovery.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Three-Level Radiation-Induced Sensor Error Rejection (Interactive Simulator) -->
+      <div class="space-y-6">
+        <div class="text-center max-w-3xl mx-auto space-y-2">
+          <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-emerald-500/20 text-emerald-300 border border-emerald-500/40">
+            Fault-Tolerant Firmware Architecture
+          </div>
+          <h3 class="text-2xl sm:text-3xl font-black text-white">
+            Three-Level Sensor Error Rejection System
+          </h3>
+          <p class="text-xs sm:text-sm text-slate-300">
+            Radiation-induced transient errors may produce corrupted or unrealistic sensor readings. Sensor data is rigorously validated through a 3-tier validation pipeline before being used for thermal control.
+          </p>
+        </div>
+
+        <!-- 3 Level Description Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div class="p-5 rounded-2xl bg-slate-900/80 border border-slate-700/60 space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold uppercase tracking-wider text-cyan-400 font-mono">Level 1</span>
+              <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-800 text-slate-300">Sanity Filter</span>
+            </div>
+            <h4 class="text-base font-bold text-white">Range Check</h4>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Rejects physically impossible values outside the environmental bounds of the enclosure.
+            </p>
+            <div class="p-2.5 rounded-lg bg-slate-950 font-mono text-[11px] text-red-400 border border-red-500/30">
+              Example: Temperature = +150°C → Invalid
+            </div>
+          </div>
+
+          <div class="p-5 rounded-2xl bg-slate-900/80 border border-slate-700/60 space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold uppercase tracking-wider text-purple-400 font-mono">Level 2</span>
+              <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-800 text-slate-300">Rate Filter</span>
+            </div>
+            <h4 class="text-base font-bold text-white">Rate-of-Change Check</h4>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Rejects sudden unrealistic step-jumps between consecutive control cycles.
+            </p>
+            <div class="p-2.5 rounded-lg bg-slate-950 font-mono text-[11px] text-amber-300 border border-amber-500/30">
+              -15°C → -14°C → +80°C → Corrupted Reading
+            </div>
+          </div>
+
+          <div class="p-5 rounded-2xl bg-slate-900/80 border border-slate-700/60 space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold uppercase tracking-wider text-emerald-400 font-mono">Level 3</span>
+              <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-800 text-slate-300">TMR Voting</span>
+            </div>
+            <h4 class="text-base font-bold text-white">Cross-Sensor Redundancy</h4>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Multiple sensors provide independent measurements. ESP32 applies majority voting to isolate outliers.
+            </p>
+            <div class="p-2.5 rounded-lg bg-slate-950 font-mono text-[11px] text-emerald-300 border border-emerald-500/30">
+              T1=-10°C, T2=-11°C, T3=+80°C → Result ≈ -10 to -11°C
+            </div>
+          </div>
+        </div>
+
+        <!-- Live Interactive Tri-Sensor Voting Simulator -->
+        <div id="sensor-voting-simulator-container" class="glass-panel p-6 sm:p-8 rounded-3xl border-emerald-500/30">
+          <!-- Populated by simulators.js -->
+        </div>
+      </div>
+
+      <!-- Watchdog Supervision & Deterministic Post-Reset Recovery -->
+      <div class="glass-panel p-6 sm:p-8 rounded-3xl border-slate-700/80 space-y-6">
+        <div class="max-w-3xl">
+          <span class="text-xs font-mono font-bold text-cyan-400 uppercase tracking-wider block mb-1">Execution Integrity &amp; Watchdog</span>
+          <h3 class="text-2xl font-bold text-white mb-2">Watchdog Supervision &amp; Deterministic Post-Reset Procedure</h3>
+          <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+            The watchdog timer is serviced <strong>strictly from the main control loop after the sensor validity check has passed</strong>. A hung, looped, or corrupted program cannot keep the timer satisfied, triggering an automatic MCU reset into a verified safe state.
+          </p>
+        </div>
+
+        <!-- Sequence Diagram -->
+        <div class="p-4 sm:p-5 rounded-2xl bg-slate-950/80 border border-slate-800">
+          <div class="flex flex-wrap items-center justify-center gap-2 sm:gap-3 text-xs font-mono text-center">
+            <span class="px-3 py-2 rounded-lg bg-slate-800 text-slate-200 border border-slate-700 font-bold">Sensors</span>
+            <span class="text-cyan-400 font-bold">→</span>
+            <span class="px-3 py-2 rounded-lg bg-cyan-950 text-cyan-300 border border-cyan-500/40 font-bold">Sensor Validity Check</span>
+            <span class="text-cyan-400 font-bold">→</span>
+            <span class="px-3 py-2 rounded-lg bg-purple-950 text-purple-300 border border-purple-500/40 font-bold">Thermal Controller</span>
+            <span class="text-cyan-400 font-bold">→</span>
+            <span class="px-3 py-2 rounded-lg bg-blue-950 text-blue-300 border border-blue-500/40 font-bold">Watchdog Monitoring</span>
+            <span class="text-cyan-400 font-bold">→</span>
+            <span class="px-3 py-2 rounded-lg bg-amber-950 text-amber-300 border border-amber-500/40 font-bold">Fault Detection</span>
+            <span class="text-cyan-400 font-bold">→</span>
+            <span class="px-3 py-2 rounded-lg bg-emerald-950 text-emerald-300 border border-emerald-500/40 font-bold">Automatic Recovery</span>
+          </div>
+        </div>
+
+        <!-- After Reset 7-Point Routine -->
+        <div class="space-y-3">
+          <h4 class="text-sm font-bold uppercase tracking-wider text-slate-300">Deterministic After-Reset Protocol:</h4>
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 text-xs">
+            <div class="p-3.5 rounded-xl bg-slate-900/60 border border-slate-800 space-y-1">
+              <span class="font-bold text-cyan-400 block font-mono">• 1 &amp; 2: Init &amp; Validate</span>
+              <p class="text-slate-300">Initialize sensors and measurement interfaces; validate sensor readings and reject invalid measurements.</p>
+            </div>
+            <div class="p-3.5 rounded-xl bg-slate-900/60 border border-slate-800 space-y-1">
+              <span class="font-bold text-purple-400 block font-mono">• 3 &amp; 4: Health &amp; Thermal Check</span>
+              <p class="text-slate-300">Check system operating parameters (temperature, power/current) and evaluate thermal safety envelopes.</p>
+            </div>
+            <div class="p-3.5 rounded-xl bg-slate-900/60 border border-slate-800 space-y-1">
+              <span class="font-bold text-amber-400 block font-mono">• 5: Fail-Safe Heater Lock</span>
+              <p class="text-slate-300">Put high-power heater elements into an immediate safe OFF state to eliminate runaway risk.</p>
+            </div>
+            <div class="p-3.5 rounded-xl bg-slate-900/60 border border-slate-800 space-y-1">
+              <span class="font-bold text-emerald-400 block font-mono">• 6: Active Thermal Fans</span>
+              <p class="text-slate-300">Keep the cooling fan active if required for thermal recovery.</p>
+            </div>
+            <div class="p-3.5 rounded-xl bg-slate-900/60 border border-slate-800 space-y-1 sm:col-span-2">
+              <span class="font-bold text-teal-400 block font-mono">• 7: Adaptive Control Resumption</span>
+              <p class="text-slate-300">Resume normal monitoring and adaptive cooling control once valid sensor readings are available.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Field Benefit Callout -->
+        <div class="p-4 bg-gradient-to-r from-purple-950/40 to-slate-900/60 rounded-xl border border-purple-500/30 text-xs text-slate-300 flex items-center justify-between flex-wrap gap-3">
+          <p class="max-w-2xl">
+            <strong class="text-purple-300">Remote Off-Grid Deployment:</strong> Because remote Ladakh installations are often off-grid with limited maintenance access, the system is positioned as maintenance-reducing passive protection and adaptive fault tolerance.
+          </p>
+          <span class="px-3 py-1 rounded-full bg-purple-500/20 text-purple-300 border border-purple-500/40 font-mono text-[11px] font-bold">
+            Maintenance-Reducing System
+          </span>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ==========================================
+         SECTION 4: COMPARATIVE ANALYSIS & PITCH MATRIX
+         ========================================== -->
+    <section id="comparison" class="py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-12">
+      <!-- Section Header -->
+      <div class="text-center max-w-3xl mx-auto space-y-3">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-purple-500/20 text-purple-300 border border-purple-500/40">
+          Executive Pitch Matrix
+        </div>
+        <h2 class="text-3xl sm:text-5xl font-black text-white">
+          Comparative Analysis &amp; Technical Benchmark
+        </h2>
+        <p class="text-slate-300 text-base leading-relaxed">
+          How DASH-IB novel bio-composite and EHD field shaping outperforms legacy aerospace wiring standards in safety, environmental impact, and weight efficiency.
+        </p>
+      </div>
+
+      <!-- Feature-by-Feature Comparison Matrix Table -->
+      <div class="glass-panel rounded-3xl overflow-hidden border-slate-700/80 shadow-2xl">
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-sm border-collapse">
+            <thead>
+              <tr class="bg-slate-900 border-b border-slate-700 text-xs font-bold uppercase tracking-wider">
+                <th class="p-5 text-slate-400 w-1/4">Evaluation Parameter</th>
+                <th class="p-5 text-red-400 w-3/8 bg-red-950/20 border-r border-slate-800">
+                  Standard Aerospace Solutions (SF₆ / PTFE / Kapton)
+                </th>
+                <th class="p-5 text-cyan-400 w-3/8 bg-cyan-950/20">
+                  DASH-IB Novel Technology
+                </th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-800">
+              <!-- Parameter 1 -->
+              <tr class="hover:bg-slate-800/30 transition-colors">
+                <td class="p-5 font-bold text-white">
+                  <div class="flex items-center gap-2">
+                    <span class="text-lg">🌿</span> Environmental Impact
+                  </div>
+                </td>
+                <td class="p-5 text-slate-300 bg-red-950/10 border-r border-slate-800 text-xs leading-relaxed">
+                  <div class="flex items-start gap-2">
+                    <span class="text-red-400 text-base">✕</span>
+                    <div>
+                      <strong class="text-red-300 block mb-1">High Greenhouse Potential / PFAS:</strong>
+                      Utilizes sulfur hexafluoride (\(\text{SF}_6\), GWP ~23,500) gas insulation or persistent fluoropolymers (PTFE/PFAS) that release toxic hydrogen fluoride when pyrolyzed.
+                    </div>
+                  </div>
+                </td>
+                <td class="p-5 text-slate-200 bg-cyan-950/10 text-xs leading-relaxed">
+                  <div class="flex items-start gap-2">
+                    <span class="text-emerald-400 text-base">✓</span>
+                    <div>
+                      <strong class="text-cyan-300 block mb-1">100% Bio-Compatible &amp; Non-Toxic:</strong>
+                      Formulated with plant-derived cellulose nanocrystals (CNC), biodegradable sodium alginate, and non-toxic cholinium ionic liquids. Zero PFAS bio-accumulation.
+                    </div>
+                  </div>
+                </td>
+              </tr>
+
+              <!-- Parameter 2 -->
+              <tr class="hover:bg-slate-800/30 transition-colors">
+                <td class="p-5 font-bold text-white">
+                  <div class="flex items-center gap-2">
+                    <span class="text-lg">🛡️</span> Failure Vulnerability
+                  </div>
+                </td>
+                <td class="p-5 text-slate-300 bg-red-950/10 border-r border-slate-800 text-xs leading-relaxed">
+                  <div class="flex items-start gap-2">
+                    <span class="text-red-400 text-base">✕</span>
+                    <div>
+                      <strong class="text-red-300 block mb-1">Carbonization &amp; Arc Tracking:</strong>
+                      Micro-cracks cause localized discharge channels that turn polyimide insulation into conductive carbon tracks, resulting in catastrophic wire harness burn-out.
+                    </div>
+                  </div>
+                </td>
+                <td class="p-5 text-slate-200 bg-cyan-950/10 text-xs leading-relaxed">
+                  <div class="flex items-start gap-2">
+                    <span class="text-emerald-400 text-base">✓</span>
+                    <div>
+                      <strong class="text-cyan-300 block mb-1">Autonomous Self-Healing:</strong>
+                      Dielectric micro-cracks automatically trigger localized electro-osmotic ionic gel migration, re-establishing dielectric void barriers within milliseconds.
+                    </div>
+                  </div>
+                </td>
+              </tr>
+
+              <!-- Parameter 3 -->
+              <tr class="hover:bg-slate-800/30 transition-colors">
+                <td class="p-5 font-bold text-white">
+                  <div class="flex items-center gap-2">
+                    <span class="text-lg">💵</span> Production Cost
+                  </div>
+                </td>
+                <td class="p-5 text-slate-300 bg-red-950/10 border-r border-slate-800 text-xs leading-relaxed">
+                  <div class="flex items-start gap-2">
+                    <span class="text-red-400 text-base">✕</span>
+                    <div>
+                      <strong class="text-red-300 block mb-1">High Capital Expenditure:</strong>
+                      Requires complex chemical vapor deposition (CVD), high-purity vacuum resin potting, and specialized autoclaves for aerospace validation.
+                    </div>
+                  </div>
+                </td>
+                <td class="p-5 text-slate-200 bg-cyan-950/10 text-xs leading-relaxed">
+                  <div class="flex items-start gap-2">
+                    <span class="text-emerald-400 text-base">✓</span>
+                    <div>
+                      <strong class="text-cyan-300 block mb-1">Cost-Effective Continuous Extrusion:</strong>
+                      Leverages abundant agricultural and biopolymer feedstocks with continuous dual-pass cross-head extrusion and ambient dip-coating.
+                    </div>
+                  </div>
+                </td>
+              </tr>
+
+              <!-- Parameter 4 -->
+              <tr class="hover:bg-slate-800/30 transition-colors">
+                <td class="p-5 font-bold text-white">
+                  <div class="flex items-center gap-2">
+                    <span class="text-lg">⚖️</span> Weight Efficiency
+                  </div>
+                </td>
+                <td class="p-5 text-slate-300 bg-red-950/10 border-r border-slate-800 text-xs leading-relaxed">
+                  <div class="flex items-start gap-2">
+                    <span class="text-red-400 text-base">✕</span>
+                    <div>
+                      <strong class="text-red-300 block mb-1">Excessive Dielectric Thickness:</strong>
+                      Designers must increase insulation wall thickness by 250% to satisfy safety margins against Paschen minimum breakdown in unpressurized bays.
+                    </div>
+                  </div>
+                </td>
+                <td class="p-5 text-slate-200 bg-cyan-950/10 text-xs leading-relaxed">
+                  <div class="flex items-start gap-2">
+                    <span class="text-emerald-400 text-base">✓</span>
+                    <div>
+                      <strong class="text-cyan-300 block mb-1">Ultra-Lightweight Active EHD:</strong>
+                      Active electric field gradient smoothing achieves high breakdown protection with a wall thickness under 1.3 mm, cutting harness mass by up to 35%.
+                    </div>
+                  </div>
+                </td>
+              <!-- Parameter 5: Radiation & Environmental Resilience -->
+              <tr class="hover:bg-slate-800/30 transition-colors">
+                <td class="p-5 font-bold text-white">
+                  <div class="flex items-center gap-2">
+                    <span class="text-lg">⚛️</span> Radiation &amp; Fault Resilience
+                  </div>
+                </td>
+                <td class="p-5 text-slate-300 bg-red-950/10 border-r border-slate-800 text-xs leading-relaxed">
+                  <div class="flex items-start gap-2">
+                    <span class="text-red-400 text-base">✕</span>
+                    <div>
+                      <strong class="text-red-300 block mb-1">Unshielded Vulnerability &amp; SEU Resets:</strong>
+                      Standard aerospace and commercial drone enclosures lack neutron moderation, suffering cosmic-ray SEU bit flips, unhandled sensor spikes, and premature UV polymer embrittlement.
+                    </div>
+                  </div>
+                </td>
+                <td class="p-5 text-slate-200 bg-cyan-950/10 text-xs leading-relaxed">
+                  <div class="flex items-start gap-2">
+                    <span class="text-emerald-400 text-base">✓</span>
+                    <div>
+                      <strong class="text-cyan-300 block mb-1">Hybrid Nanocomposite &amp; 3-Tier TMR:</strong>
+                      PMMA + Rutile TiO₂/ZnO blocks >99% UV and reflects NIR; borated HDPE inner liner moderates &amp; captures secondary neutrons; 3-level sensor voting eliminates spurious actuator trips.
+                    </div>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ==========================================
+         SECTION 5: FUTURE DEVELOPMENT ROADMAP
+         ========================================== -->
+    <section id="roadmap" class="py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-12">
+      <!-- Section Header -->
+      <div class="text-center max-w-3xl mx-auto space-y-3">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-teal-500/20 text-teal-300 border border-teal-500/40">
+          Scale &amp; Commercialization
+        </div>
+        <h2 class="text-3xl sm:text-5xl font-black text-white">
+          Future Development Roadmap
+        </h2>
+        <p class="text-slate-300 text-base leading-relaxed">
+          From laboratory proof-of-concept to automated continuous manufacturing and aerospace flight certification.
+        </p>
+      </div>
+
+      <!-- 3-Phase Process Cards -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- Phase 1 -->
+        <div class="glass-panel glass-panel-hover p-6 sm:p-7 rounded-3xl border-cyan-500/30 flex flex-col justify-between space-y-6">
+          <div class="space-y-4">
+            <div class="flex items-center justify-between">
+              <span class="px-3 py-1 rounded-full text-xs font-bold bg-cyan-500/20 text-cyan-300 border border-cyan-500/30">
+                Phase 1: In Progress
+              </span>
+              <span class="text-xs font-mono text-slate-400">TRL 4 → 5</span>
+            </div>
+            <h3 class="text-xl font-bold text-white">Prototype Optimization</h3>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Chemical composition refinement of the cholinium-alginate ionic gel to achieve consistent ionic mobility across extreme operational temperature spans:
+              <strong class="text-cyan-300 block mt-1">\(-50^\circ\text{C} \text{ to } +120^\circ\text{C}\)</strong>
+            </p>
+            <ul class="space-y-2 text-xs text-slate-400">
+              <li class="flex items-center gap-2">
+                <span class="text-cyan-400 font-bold">✓</span> Rheological tuning of shear-thinning behavior
+              </li>
+              <li class="flex items-center gap-2">
+                <span class="text-cyan-400 font-bold">✓</span> Freeze-thaw cycling in liquid nitrogen bath
+              </li>
+              <li class="flex items-center gap-2">
+                <span class="text-cyan-400 font-bold">✓</span> Microscopic crack healing kinetics evaluation
+              </li>
+            </ul>
+          </div>
+          <div class="pt-4 border-t border-slate-800 flex items-center justify-between text-xs text-slate-400">
+            <span>Milestone: Chemical Stability</span>
+            <span class="font-bold text-cyan-300 font-mono">85% Complete</span>
+          </div>
+        </div>
+
+        <!-- Phase 2 -->
+        <div class="glass-panel glass-panel-hover p-6 sm:p-7 rounded-3xl border-emerald-500/30 flex flex-col justify-between space-y-6">
+          <div class="space-y-4">
+            <div class="flex items-center justify-between">
+              <span class="px-3 py-1 rounded-full text-xs font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+                Phase 2: Upcoming
+              </span>
+              <span class="text-xs font-mono text-slate-400">TRL 6</span>
+            </div>
+            <h3 class="text-xl font-bold text-white">Automated Manufacturing</h3>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Development of continuous co-extrusion tooling capable of simultaneous dual-layer gel encapsulation and outer conductive mesh braided overspinning on standard wire-drawing lines.
+            </p>
+            <ul class="space-y-2 text-xs text-slate-400">
+              <li class="flex items-center gap-2">
+                <span class="text-emerald-400 font-bold">⏱</span> High-speed extrusion die design (>10 m/min)
+              </li>
+              <li class="flex items-center gap-2">
+                <span class="text-emerald-400 font-bold">⏱</span> In-line laser micrometer thickness feedback
+              </li>
+              <li class="flex items-center gap-2">
+                <span class="text-emerald-400 font-bold">⏱</span> Ladakh rural cottage scouring integration
+              </li>
+            </ul>
+          </div>
+          <div class="pt-4 border-t border-slate-800 flex items-center justify-between text-xs text-slate-400">
+            <span>Milestone: Co-Extrusion Pilot</span>
+            <span class="font-bold text-emerald-300 font-mono">Q2 Target</span>
+          </div>
+        </div>
+
+        <!-- Phase 3 -->
+        <div class="glass-panel glass-panel-hover p-6 sm:p-7 rounded-3xl border-purple-500/30 flex flex-col justify-between space-y-6">
+          <div class="space-y-4">
+            <div class="flex items-center justify-between">
+              <span class="px-3 py-1 rounded-full text-xs font-bold bg-purple-500/20 text-purple-300 border border-purple-500/30">
+                Phase 3: Planned
+              </span>
+              <span class="text-xs font-mono text-slate-400">TRL 7 → 8</span>
+            </div>
+            <h3 class="text-xl font-bold text-white">Aerospace Certification</h3>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Formal thermal-vacuum chamber qualification adhering to NASA/ISRO space standards for near-space high-altitude stratospheric balloons, stratospheric UAVs, and cubesat wiring harnesses.
+            </p>
+            <ul class="space-y-2 text-xs text-slate-400">
+              <li class="flex items-center gap-2">
+                <span class="text-purple-400 font-bold">⏱</span> ASTM E595 Outgassing &amp; CVCM testing
+              </li>
+              <li class="flex items-center gap-2">
+                <span class="text-purple-400 font-bold">⏱</span> Stratospheric balloon flight payload test
+              </li>
+              <li class="flex items-center gap-2">
+                <span class="text-purple-400 font-bold">⏱</span> Mil-Spec vibration &amp; pyrotechnic shock tests
+              </li>
+            </ul>
+          </div>
+          <div class="pt-4 border-t border-slate-800 flex items-center justify-between text-xs text-slate-400">
+            <span>Milestone: Flight Qualification</span>
+            <span class="font-bold text-purple-300 font-mono">NASA/ISRO Spec</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ==========================================
+       FOOTER & METADATA
+       ========================================== -->
+  <footer class="glass-nav border-t border-slate-800 py-12 px-4 sm:px-6 lg:px-8 text-xs text-slate-400 content-layer">
+    <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-6">
+      <div class="flex items-center gap-3">
+        <div class="w-8 h-8 rounded-lg bg-gradient-to-tr from-cyan-500 to-amber-500 flex items-center justify-center text-slate-950 font-black">
+          🏔️
+        </div>
+        <div>
+          <span class="font-bold text-white block">Sustainable &amp; High-Altitude Smart Material Engineering</span>
+          <span class="text-[11px] text-slate-400">Ladakh Agricultural Waste • DASH-IB Low-Pressure Cable • HAA/SHAA Radiation Hardening</span>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-5 text-xs flex-wrap">
+        <a href="#hero" class="hover:text-cyan-400 transition-colors">Back to Top ↑</a>
+        <a href="#thermal-insulation" class="hover:text-cyan-400 transition-colors">Thermal Insulation</a>
+        <a href="#dash-ib" class="hover:text-cyan-400 transition-colors">DASH-IB Technology</a>
+        <a href="#radiation-shielding" class="hover:text-cyan-400 transition-colors">Radiation Hardening</a>
+        <a href="#comparison" class="hover:text-cyan-400 transition-colors">Comparison Matrix</a>
+        <a href="#roadmap" class="hover:text-cyan-400 transition-colors">Roadmap</a>
+      </div>
+
+      <div class="text-[11px] text-slate-400 font-mono">
+        Built with HTML5 Canvas, Tailwind CSS &amp; KaTeX
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==========================================
+       DEPLOYMENT LIGHTBOX MODAL
+       ========================================== -->
+  <div id="deployment-lightbox" class="fixed inset-0 z-50 bg-black/90 backdrop-blur-md hidden flex items-center justify-center p-4 sm:p-6 transition-opacity duration-300">
+    <div class="relative max-w-5xl w-full bg-slate-900/95 border border-slate-700 rounded-3xl overflow-hidden shadow-2xl flex flex-col max-h-[92vh]">
+      <!-- Modal Header -->
+      <div class="px-6 py-4 border-b border-slate-800 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <span id="lightbox-badge" class="px-3 py-1 rounded-full text-xs font-mono font-bold bg-purple-500/20 text-purple-300 border border-purple-500/40">
+            Field Testbed
+          </span>
+          <h3 id="lightbox-title" class="text-base sm:text-lg font-bold text-white">Station Title</h3>
+        </div>
+        <button onclick="closeDeploymentLightbox()" class="text-slate-400 hover:text-white p-2 rounded-xl bg-slate-800/80 hover:bg-slate-700 transition-colors" title="Close Lightbox (Esc)">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+        </button>
+      </div>
+
+      <!-- Modal Body (Image + Telemetry HUD) -->
+      <div class="overflow-y-auto p-6 space-y-4">
+        <div class="relative rounded-2xl overflow-hidden border border-slate-800 aspect-[16/9] bg-black">
+          <img id="lightbox-img" src="" alt="" class="w-full h-full object-cover">
+        </div>
+
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs font-mono">
+          <div class="p-3 rounded-xl bg-slate-950 border border-slate-800">
+            <span class="text-slate-500 block mb-0.5">ALTITUDE</span>
+            <span id="lightbox-alt" class="font-bold text-cyan-300 text-sm">--</span>
+          </div>
+          <div class="p-3 rounded-xl bg-slate-950 border border-slate-800">
+            <span class="text-slate-500 block mb-0.5">AMBIENT TEMP</span>
+            <span id="lightbox-temp" class="font-bold text-emerald-400 text-sm">--</span>
+          </div>
+          <div class="p-3 rounded-xl bg-slate-950 border border-slate-800">
+            <span class="text-slate-500 block mb-0.5">SOLAR FLUX</span>
+            <span id="lightbox-flux" class="font-bold text-amber-400 text-sm">--</span>
+          </div>
+          <div class="p-3 rounded-xl bg-slate-950 border border-slate-800">
+            <span class="text-slate-500 block mb-0.5">RADIATION SEU STATUS</span>
+            <span id="lightbox-status" class="font-bold text-purple-300 text-sm">--</span>
+          </div>
+        </div>
+
+        <div class="p-4 rounded-xl bg-slate-800/60 border border-slate-700/50">
+          <span class="text-xs uppercase font-bold text-slate-400 block mb-1">Field Validation Mission:</span>
+          <p id="lightbox-desc" class="text-xs sm:text-sm text-slate-200 leading-relaxed"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Core Scripts -->
+  <script src="asset/canvas-landscape.js"></script>
+  <script src="asset/simulators.js"></script>
+  <script src="asset/app.js"></script>
+</body>
+</html>
